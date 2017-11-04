@@ -1,0 +1,58 @@
+%
+%(This makes you a stepper motor mounting bracket for the Y axis)
+%(Set 0,0 to bottom LEFT corner of aluminium barstock)
+%This assumes the block has been milled to the appropriate dimensions
+%and the gcode is intended to cut the stepper holes and drill the 
+%stepper bolt holes.
+%it's intended for manual X (as I haven't converted X on my machine yet)
+
+
+G21 (metric)
+G90 (absolute)
+F100 (feed rate 100mm/min)
+
+%(Using a 4mm drill bit - will tap out to M5)
+%(These are the stepper motor mounting holes)
+G0 X31.43 Y6.45  (bottom left)
+M0 (Drill)
+G0 Y53.55 (top left)
+M0 (Drill)
+G0 X78.57 (top right)
+M0 (Drill)
+G0 Y6.45 (bottom right)
+M0 (Drill)
+
+%(Change to a 10mm dia plunge capable bit here)
+%(Go to centre of clearance hole first)
+G0 X55 Y30
+
+%(machine the stepper mounting lip)
+%(needs to be 2mm deep)
+G0 X40.95  
+%(55 minus    19.05 minus 5)
+M0 (down)
+G3 I14.05
+M0 (lift)
+
+%I found I needed a slightly larger mounting lip clearance to fit comfortably
+%so made another pass:
+G0 X40.75
+G3 I14.25
+
+%(machine the stepper clearance hole)
+%(Clearance hole radius is 15mm)
+
+G0 X45.5 
+; 55 - (radius of hole - cutter radius - 0.5 clearance to allow a final pass))
+
+M0 (down)
+G3 I9.5
+
+M0 (repeat as necessary)
+
+%(Final pass!)
+G0 X45
+G3 I10
+
+M0 (done!)
+%
