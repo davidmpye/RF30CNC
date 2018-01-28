@@ -1,6 +1,6 @@
+include <MCAD/stepper.scad>
 
 $fn=50;
-
 
 mill_mount_bolt_dia = 8; //To machine, M8 bolts.
 
@@ -85,12 +85,14 @@ module stepper_bracket() {
     bracket_z = 60;
     
     
+ translate([55, bracket_y -9, 30 ])motor(Nema23, NemaLong,true,[0,0,0],[90,0,0]);
      difference() {
         
         cube([bracket_x, bracket_y, bracket_z]);
        
         //clearance hole for the stepper
         translate([55, bracket_y + 0.5, 30 ]) rotate([90,0,0]) cylinder(r=stepper_clearance_hole_dia/2, h= bracket_y + 1);
+         
         //The flange that locates the stepper in place.
         translate([55, stepper_groove_depth, 30 ]) rotate([90,0,0]) cylinder(r=stepper_groove_hole_dia/2, h= bracket_y + 1);
          
